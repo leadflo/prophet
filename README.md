@@ -1,4 +1,4 @@
-# Prophet
+# Prophet <!-- omit in toc -->
 
 > Type-safe, reliable message-passing for PHP
 
@@ -6,16 +6,21 @@ Prophet makes it easy to design and build decoupled systems using PHP.
 
 It does this by providing well-tested, type-safe primitives to decompose, distribute and integrate your applications using a message-passing architecture.
 
-Prophet supports these concepts and patterns out of the box:
+## Table of Contents <!-- omit in toc -->
 
-* **A message bus**
-* **Message routing**
-* **Messages**
-* **Receivers**
-* **Middleware**
-* **Persistence & queues**
-* **Workers**
-* **Framework bridges**
+- [Getting Started](#getting-started)
+- [Key Concepts](#key-concepts)
+  - [The Message Bus](#the-message-bus)
+  - [Routing](#routing)
+  - [Messages](#messages)
+  - [Receivers](#receivers)
+  - [Middleware](#middleware)
+  - [Persistence & Queues](#persistence--queues)
+  - [Workers](#workers)
+  - [Framework Bridges](#framework-bridges)
+- [Learn more](#learn-more)
+- [Contributing](#contributing)
+- [Releases](#releases)
 
 ## Getting Started
 
@@ -43,6 +48,7 @@ Your dispatching code is then decoupled from the receiver code.
 * [ ] Show how to init a bus
 * [ ] Show how to dispatch an async message
 * [ ] Show how to dispatch a sync message
+* [ ] Show how to dispatch a delayed message
 
 ### Routing
 
@@ -99,16 +105,48 @@ Receivers define a single method to implement. Outside of that, your receivers a
 
 Middleware provides a way to extract and apply common processing before and after a receiver accepts a message.
 
-* [ ] Describe use cases
-* [ ] Describe middleware provided out of the box
+In essence, middlewares *decorate* receivers.
+
+For example, middleware allows you to:
+
+* Rate-limit the messages received by receiver
+* Validate incoming messages sent to a receiver
+* Bind a receivers to a context based on the content of a message
+* Logging or instrumenting receivers for telemetry and debugging
+
+Middleware may be applied to individual receivers, a group of receivers or all receivers registered in a bus.
+
+Out of the box, Prophet provides middleware for:
+
+* Rate-limiting messages
+* Rejecting/filtering messages
+* Retrying with a backoff strategy
+
+* [ ] Show an example of applying global middleware
+* [ ] Show an example of applying middleware to a group of receivers
+* [ ] Show an example of applying middleware to a single receiver
 * [ ] Show an example of user-defined middleware
 
 ### Persistence & Queues
 
-* **Persistence**, using the adapter pattern with implemenations for common message queuing systems
+Message persistence provides a way to push messages on to a particular queue.
 
-* [ ] Describe use cases
-* [ ] Describe persistence/queues supported out of the box
+This allows you to:
+
+* Defer messages to a background worker
+* Send messages to a queue consumed by a service written in a different language
+* Communicate across fibers and threads in a concurrent environment e.g Swoole or Octane
+
+Prophet uses the adapter pattern to provide message persistence, with these mechanisms supported out of the box:
+
+* Database (MySQL, Postgres)
+* Redis
+* AMPQ
+* Laravel bridge
+* Memory
+
+It's also possible implement your own persistence adapter.
+
 * [ ] Show how to configure the bus with DB-driven queue
 * [ ] Show how to configure the bus with a Redis-driven queue
 * [ ] Show how to configure the bus with an AMPQ service
@@ -117,13 +155,27 @@ Middleware provides a way to extract and apply common processing before and afte
 
 ### Workers
 
-* **Workers**, which execute message receivers in the background, removing them from persistence
+A worker takes messages from a source, passing them to an instance of the bus to be handled synchronously.
+
+This allows messages to be consumed in one or more background processes.
+
+Out of the box, Prophet supports these types of workers:
+
+* Single-process workers
+* Forking workers
+* Fiber workers
+* In-process workers (for testing)
+
+The single process and forking workers are intended to be used for background processing.
+
+By supporting fiber workers, you can run one or more workers in the same process as your application, as well as a background worker that uses fibers for concurrency.
+
+The in-process worker is designed to be used for testing, providing a way for all messages to be processed in the same process, even if intended to be run in the background.
 
 * [ ] Describe use cases
 * [ ] Describe types of supported workers
 * [ ] Show how to start a single-process worker
 * [ ] Show how to start a forking worker
-* [ ] Show how to start a threaded worker
 * [ ] Show how to start a fibers worker
 * [ ] Show how to use a worker in the same process for testing
 
