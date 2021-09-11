@@ -1,0 +1,38 @@
+{
+    "name": "thefreshuk/skeleton",
+    "description": "Skeleton composer project for Leadflo PHP packages.",
+    "type": "library",
+    "readme": "./README.md",
+    "require-dev": {
+        "ext-pcov": "*",
+        "ext-zend-opcache": "*",
+        "brianium/paratest": "^6.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+        "infection/infection": "^0.21.1",
+        "phpbench/phpbench": "^1.0.0-alpha-4",
+        "phpunit/phpunit": "^9.5",
+        "slevomat/coding-standard": "^6.4",
+        "squizlabs/php_codesniffer": "^3.5",
+        "vimeo/psalm": "^4.6"
+    },
+    "license": "MIT",
+    "authors": [],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skeleton\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Skeleton\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
