@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Skeleton\Tests\Unit;
+namespace Leadflo\Prophet\Tests\Unit;
 
+use Leadflo\Prophet\Skeleton;
 use PHPUnit\Framework\TestCase;
-use Skeleton\Skeleton;
 
 class ExampleTest extends TestCase
 {

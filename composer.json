@@ -1,6 +1,6 @@
 {
-    "name": "thefreshuk/skeleton",
-    "description": "Skeleton composer project for Leadflo PHP packages.",
+    "name": "leadflo/prophet",
+    "description": "A type-safe message bus library",
     "type": "library",
     "readme": "./README.md",
     "require-dev": {
@@ -19,16 +19,16 @@
     "authors": [],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.4"
+        "php": ">=8.0"
     },
     "autoload": {
         "psr-4": {
-            "Skeleton\\": "src/"
+            "Leadflo\\Prophet\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Skeleton\\Tests\\": "tests/"
+            "Leadflo\\Prophet\\Tests\\": "tests/"
         }
     },
     "config": {

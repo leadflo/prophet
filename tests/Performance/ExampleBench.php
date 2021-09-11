@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Skeleton\Tests\Performance;
+namespace Leadflo\Prophet\Tests\Performance;
 
-use Skeleton\Skeleton;
+use Leadflo\Prophet\Skeleton;
 
 class ExampleBench
 {
